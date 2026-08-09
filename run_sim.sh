@@ -13,8 +13,13 @@ cleanup() {
   pkill -f "parameter_bridge" || true
   kill $GZ_PID 2>/dev/null || true
   
-  # Kill gnome-terminals spawned for SITL and MAVROS
+  # Kill SITL launchers
   pkill -f "sim_vehicle.py" || true
+  
+  # NEW: Kill the actual ArduPilot binaries, MAVProxy, and xterm windows
+  pkill -f "arducopter" || true
+  pkill -f "mavproxy" || true
+  pkill -x "xterm" || true
   
   echo "Done!"
   exit 0
@@ -26,7 +31,8 @@ trap cleanup SIGINT SIGTERM
 echo "========================================================"
 echo " Running Pre-Launch Cleanup & Network Config"
 echo "========================================================"
-killall -9 gz sim_vehicle.py python3 mavros_node parameter_bridge 2>/dev/null || true
+# Added arducopter, mavproxy, and xterm to the pre-launch kill list
+killall -9 gz sim_vehicle.py python3 mavros_node parameter_bridge arducopter mavproxy xterm 2>/dev/null || true
 
 export GZ_IP=127.0.0.1
 export IGN_IP=127.0.0.1
