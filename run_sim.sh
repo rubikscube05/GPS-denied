@@ -50,7 +50,7 @@ sleep 10
 echo "-> Spawning ArduPilot Flight Controller windows (Swarm)..."
 
 # Drone 1: Joy (Instance 0)
-gnome-terminal --title="ArduPilot SITL - Joy" -- bash -c \
+gnome-terminal --title="ArduPilot SITL - Joye" -- bash -c \
   "source ~/venv-ardupilot/bin/activate && /home/vaibhav/ardupilot/Tools/autotest/sim_vehicle.py -v ArduCopter -f gazebo-iris -I 0 --sysid 1 --model JSON --out=udp:127.0.0.1:14555 -N; exec bash" &
 sleep 3
 
