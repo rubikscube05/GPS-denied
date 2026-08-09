@@ -80,9 +80,9 @@ gnome-terminal --title="ROS 2 MAVROS Swarm" -- bash -c \
 # Gazebo -> ROS 2 Bridges (Joy)
 # --------------------------------------------------------
 ros2 run ros_gz_bridge parameter_bridge \
-  /world/iris_runway/model/Joy/model/gimbal/link/pitch_link/sensor/camera/image@sensor_msgs/msg/Image[gz.msgs.Image \
-  /world/iris_runway/model/Joy/model/gimbal/link/pitch_link/sensor/camera/camera_info@sensor_msgs/msg/CameraInfo[gz.msgs.CameraInfo \
-  /world/iris_runway/model/Joy/link/lidar_link/sensor/gpu_lidar/scan@sensor_msgs/msg/LaserScan[gz.msgs.LaserScan &
+  /world/iris_runway/model/Joey/model/gimbal/link/pitch_link/sensor/camera/image@sensor_msgs/msg/Image[gz.msgs.Image \
+  /world/iris_runway/model/Joey/model/gimbal/link/pitch_link/sensor/camera/camera_info@sensor_msgs/msg/CameraInfo[gz.msgs.CameraInfo \
+  /world/iris_runway/model/Joey/link/lidar_link/sensor/gpu_lidar/scan@sensor_msgs/msg/LaserScan[gz.msgs.LaserScan &
 
 # --------------------------------------------------------
 # Gazebo -> ROS 2 Bridges (Marky)
