@@ -7,7 +7,7 @@ def generate_launch_description():
         Node(
             package='mavros',
             executable='mavros_node',
-            namespace='Joy',
+            namespace='Joye',
             output='screen',
             parameters=[
                 {'fcu_url': 'udp://127.0.0.1:14550@14555'},
