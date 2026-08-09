@@ -66,3 +66,16 @@ chmod +x run_sim.sh
 2.  **ArduPilot SITL** instances boot up for Marky, DeeDee, and Joey in separate terminal windows.
 3.  **MAVROS** swarm nodes initialize via the `robofest` ROS 2 package.
 4.  **ROS ↔ Gazebo Bridge** connects the simulated camera and lidar data to ROS 2 topics.
+
+---
+
+## 📡 Configuring GPS-Denied Mode in QGroundControl (QGC)
+
+To properly simulate a GPS-denied environment, you need to manually disable the GPS parameter for your vehicles using QGroundControl.
+
+1.  **Open QGroundControl:** Launch QGC while your SITL simulation (from `./run_sim.sh`) is running. It should automatically connect to your simulated drone fleet.
+2.  **Access Parameters:** Click the **'Q' icon** (Vehicle Setup) in the top left corner, then select **Parameters** from the left sidebar.
+3.  **Disable GPS:** Search for the **`GPS_TYPE`** parameter.
+4.  **Change Value:** Change the value of `GPS_TYPE` to **`0` (None)**. 
+    *   *(Note: You will need to do this for each vehicle in your swarm using the vehicle selector in QGC).*
+5.  **Reboot Vehicles:** Save the parameters and reboot the SITL vehicles (or restart the simulation script) to ensure they boot up in a fully GPS-denied state.
