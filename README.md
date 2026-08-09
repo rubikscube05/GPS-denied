@@ -48,7 +48,7 @@ source install/setup.bash
 The provided `run_sim.sh` script contains hardcoded paths that must be updated to match your local machine's directory structure. Open `run_sim.sh` and carefully modify the following:
 *   **ArduPilot Environment:** Change `/home/vaibhav/ardupilot/Tools/autotest/sim_vehicle.py` to the correct absolute path where your ArduPilot repository is cloned.
 *   **ROS 2 Workspace:** Change `source ~/ws/install/setup.bash` if your workspace directory is named differently or located elsewhere.
-*   *(Note: Ensure the ROS-GZ bridge sections at the bottom of your script have been updated to use the name `Joey` instead of `Joy` for the image and lidar topics!)*
+
 
 ---
 
