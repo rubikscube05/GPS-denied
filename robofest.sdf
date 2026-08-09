@@ -109,8 +109,18 @@
     </include>
 
     <include>
-      <uri>model://iris_with_2d_lidar</uri>
+      <uri>model://Joy</uri>
       <pose degrees="true">0 0 0.195 0 0 90</pose>
+    </include>
+
+    <include>
+      <uri>model://Marky</uri>
+      <pose degrees="true">-3 0 0.195 0 0 90</pose>
+    </include>
+
+    <include>
+      <uri>model://DeeDee</uri>
+      <pose degrees="true">3 0 0.195 0 0 90</pose>
     </include>
 
     <!-- SLAM ENVIRONMENT PILLARS -->
