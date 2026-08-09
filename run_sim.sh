@@ -68,7 +68,7 @@ echo "========================================================"
 
 # Launch the Multi-MAVROS ROS 2 script in its own terminal
 gnome-terminal --title="ROS 2 MAVROS Swarm" -- bash -c \
-  "source /opt/ros/jazzy/setup.bash && ros2 launch multi_mavros.py; exec bash" &
+  "source /opt/ros/jazzy/setup.bash && source ~/ws/install/setup.bash && ros2 launch robofest multi_mavros.launch.py; exec bash" &
 
 # --------------------------------------------------------
 # Gazebo -> ROS 2 Bridges (Joy)
