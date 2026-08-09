@@ -10,7 +10,7 @@ def generate_launch_description():
             namespace='Joey',
             output='screen',
             parameters=[
-                {'fcu_url': 'udp://127.0.0.1:14550@14555'},
+                {'fcu_url': 'udp://127.0.0.1:14555@'},
                 {'gcs_url': 'udp://@127.0.0.1:14550'},
                 {'tgt_system': 1},
                 {'tgt_component': 1}
@@ -24,7 +24,7 @@ def generate_launch_description():
             namespace='DeeDee',
             output='screen',
             parameters=[
-                {'fcu_url': 'udp://127.0.0.1:14560@14565'},
+                {'fcu_url': 'udp://127.0.0.1:14565@'},
                 {'gcs_url': 'udp://@127.0.0.1:14550'},
                 {'tgt_system': 2},
                 {'tgt_component': 1}
@@ -38,7 +38,7 @@ def generate_launch_description():
             namespace='Marky',
             output='screen',
             parameters=[
-                {'fcu_url': 'udp://127.0.0.1:14570@14575'},
+                {'fcu_url': 'udp://127.0.0.1:14575@'},
                 {'gcs_url': 'udp://@127.0.0.1:14550'},
                 {'tgt_system': 3},
                 {'tgt_component': 1}
