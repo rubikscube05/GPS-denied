@@ -51,18 +51,8 @@ echo "-> Spawning ArduPilot Flight Controller windows (Swarm)..."
 
 # Drone 1: Joy (Instance 0)
 gnome-terminal --title="ArduPilot SITL - Joey" -- bash -c \
-  "source ~/venv-ardupilot/bin/activate && /home/vaibhav/ardupilot/Tools/autotest/sim_vehicle.py -v ArduCopter -f gazebo-iris -I 0 --sysid 1 --model JSON --out=udp:127.0.0.1:14555 -N; exec bash" &
+  "source ~/venv-ardupilot/bin/activate && /home/nikhil/ardupilot/Tools/autotest/sim_vehicle.py -v ArduCopter -f gazebo-iris -I 0 --sysid 1 --model JSON --out=udp:127.0.0.1:14555 -N; exec bash" &
 sleep 3
-
-# Drone 2: Marky (Instance 1)
-gnome-terminal --title="ArduPilot SITL - Marky" -- bash -c \
-  "source ~/venv-ardupilot/bin/activate && /home/vaibhav/ardupilot/Tools/autotest/sim_vehicle.py -v ArduCopter -f gazebo-iris -I 1 --sysid 2 --model JSON --out=udp:127.0.0.1:14565 -N; exec bash" &
-sleep 3
-
-# Drone 3: DeeDee (Instance 2)
-gnome-terminal --title="ArduPilot SITL - DeeDee" -- bash -c \
-  "source ~/venv-ardupilot/bin/activate && /home/vaibhav/ardupilot/Tools/autotest/sim_vehicle.py -v ArduCopter -f gazebo-iris -I 2 --sysid 3 --model JSON --out=udp:127.0.0.1:14575 -N; exec bash" &
-
 echo "========================================================"
 echo " Waiting 15s for SITL MAVLink stack to initialize..."
 echo "========================================================"
@@ -73,8 +63,10 @@ echo " Launching MAVROS & Gazebo Bridge..."
 echo "========================================================"
 
 # Launch the Multi-MAVROS ROS 2 script in its own terminal
+
+# Launch the Multi-MAVROS ROS 2 script in its own terminal
 gnome-terminal --title="ROS 2 MAVROS Swarm" -- bash -c \
-  "source /opt/ros/jazzy/setup.bash && source ~/ws/install/setup.bash && ros2 launch robofest multi_mavros.launch.py; exec bash" &
+  "source /opt/ros/jazzy/setup.bash && ros2 launch mavros apm.launch fcu_url:=\"udp://127.0.0.1:14555@\" tgt_system:=1; exec bash" &
 
 # --------------------------------------------------------
 # Gazebo -> ROS 2 Bridges (Joy)
@@ -84,21 +76,6 @@ ros2 run ros_gz_bridge parameter_bridge \
   /world/iris_runway/model/Joey/model/gimbal/link/pitch_link/sensor/camera/camera_info@sensor_msgs/msg/CameraInfo[gz.msgs.CameraInfo \
   /world/iris_runway/model/Joey/link/lidar_link/sensor/gpu_lidar/scan@sensor_msgs/msg/LaserScan[gz.msgs.LaserScan &
 
-# --------------------------------------------------------
-# Gazebo -> ROS 2 Bridges (Marky)
-# --------------------------------------------------------
-ros2 run ros_gz_bridge parameter_bridge \
-  /world/iris_runway/model/Marky/model/gimbal/link/pitch_link/sensor/camera/image@sensor_msgs/msg/Image[gz.msgs.Image \
-  /world/iris_runway/model/Marky/model/gimbal/link/pitch_link/sensor/camera/camera_info@sensor_msgs/msg/CameraInfo[gz.msgs.CameraInfo \
-  /world/iris_runway/model/Marky/link/lidar_link/sensor/gpu_lidar/scan@sensor_msgs/msg/LaserScan[gz.msgs.LaserScan &
-
-# --------------------------------------------------------
-# Gazebo -> ROS 2 Bridges (DeeDee)
-# --------------------------------------------------------
-ros2 run ros_gz_bridge parameter_bridge \
-  /world/iris_runway/model/DeeDee/model/gimbal/link/pitch_link/sensor/camera/image@sensor_msgs/msg/Image[gz.msgs.Image \
-  /world/iris_runway/model/DeeDee/model/gimbal/link/pitch_link/sensor/camera/camera_info@sensor_msgs/msg/CameraInfo[gz.msgs.CameraInfo \
-  /world/iris_runway/model/DeeDee/link/lidar_link/sensor/gpu_lidar/scan@sensor_msgs/msg/LaserScan[gz.msgs.LaserScan &
 
 # Keep the script alive
 wait
