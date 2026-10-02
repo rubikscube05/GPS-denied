@@ -81,6 +81,34 @@
       <parent>iris_with_standoffs::base_link</parent>
       <child>lidar_link</child>
     </joint>
+
+    <!-- ArUco ID 12 (DICT_5X5_100): 0.18 m marker on a 0.24 m white plate,
+         above the lidar puck (top at z=0.12) and between the props. -->
+    <link name="aruco_marker_link">
+      <pose>0 0 0.135 0 0 0</pose>
+      <inertial>
+        <mass>0.005</mass>
+        <inertia><ixx>1e-5</ixx><iyy>1e-5</iyy><izz>1e-5</izz></inertia>
+      </inertial>
+      <visual name="aruco_marker">
+        <geometry><box><size>0.24 0.24 0.002</size></box></geometry>
+        <material>
+          <ambient>1 1 1 1</ambient>
+          <diffuse>1 1 1 1</diffuse>
+          <pbr>
+            <metal>
+              <albedo_map>model://Marky/materials/textures/aruco_dict_5x5_100_12.png</albedo_map>
+              <roughness>1.0</roughness>
+              <metalness>0.0</metalness>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+    </link>
+    <joint name="aruco_marker_joint" type="fixed">
+      <parent>iris_with_standoffs::base_link</parent>
+      <child>aruco_marker_link</child>
+    </joint>
     <!-- plugins -->
     <plugin filename="gz-sim-joint-state-publisher-system"
       name="gz::sim::systems::JointStatePublisher">
@@ -250,6 +278,10 @@
       <fdm_port_out>9023</fdm_port_out>
       <connectionTimeoutMaxCount>5</connectionTimeoutMaxCount>
       <lock_step>1</lock_step>
+      <!-- SITL takes its clock from Gazebo. Without this the plugin reports no_time_sync
+           and SITL falls back to the simulator's perfect AHRS (AHRS_EKF_TYPE 10), so the
+           autopilot would never actually navigate on its EKF. -->
+      <no_time_sync>0</no_time_sync>
 
       <!-- Frame conventions
         Require by ArduPilot: change model and gazebo from XYZ to XY-Z coordinates

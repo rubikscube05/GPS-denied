@@ -205,13 +205,10 @@
         <always_on>1</always_on>
         <update_rate>10</update_rate>
         <visualize>1</visualize>
-
-        <plugin filename="CameraZoomPlugin"
-            name="CameraZoomPlugin">
-          <max_zoom>125.0</max_zoom>
-          <slew_rate>0.42514285714</slew_rate>
-        </plugin>
         
+        <!-- CameraZoomPlugin removed: it re-rendered the camera at ~115 deg HFOV while
+             camera_info still reported 62.2 deg, so every distance from this camera was
+             ~2.6x wrong. -->
         <plugin name="GstCameraPlugin"
             filename="GstCameraPlugin">
           <udp_host>127.0.0.1</udp_host>

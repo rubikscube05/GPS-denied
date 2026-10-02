@@ -25,6 +25,8 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
+            'aruco_localizer = robofest.aruco_localizer:main',
+            'swarm_mission = robofest.swarm_mission:main',
         ],
     },
 )
